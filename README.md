@@ -1,1 +1,0 @@
-# ColettesCorvette.github.io
