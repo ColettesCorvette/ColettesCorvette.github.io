@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colette's Corvette - Accueil</title>
+  <meta name="description" content="Bienvenue sur le site personnel de ColettesCorvette.">
+  <style>
+    :root {
+      --main-bg: #232946;
+      --accent: #eebbc3;
+      --heading: #fffffe;
+      --text: #b8c1ec;
+      --card-bg: #121629cc;
+      --button-bg: #eebbc3;
+      --button-color: #232946;
+    }
+    body {
+      background: var(--main-bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    header {
+      margin-top: 4rem;
+      text-align: center;
+    }
+    h1 {
+      color: var(--heading);
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      color: var(--accent);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 2em;
+    }
+    main {
+      background: var(--card-bg);
+      padding: 2.5em 2em;
+      border-radius: 2em;
+      box-shadow: 0 8px 32px 0 #0003;
+      max-width: 400px;
+      width: 90%;
+      margin-bottom: 3em;
+    }
+    p {
+      margin: 1.3em 0;
+    }
+    .cta {
+      display: inline-block;
+      background: var(--button-bg);
+      color: var(--button-color);
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 2em;
+      box-shadow: 0 2px 8px 0 #0001;
+      transition: background 0.2s, color 0.2s;
+    }
+    .cta:hover {
+      background: var(--heading);
+      color: var(--main-bg);
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      color: #7c7c7c;
+      padding-bottom: 1.5em;
+      font-size: 1em;
+    }
+    @media (max-width: 500px) {
+      main {
+        padding: 1.3em 0.7em;
+        border-radius: 1em;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚗 ColettesCorvette</h1>
+    <h2>Bienvenue sur mon site&nbsp;!</h2>
+  </header>
+  <main>
+    <p>
+      Passionné·e par la tech, le DIY et le partage de connaissances, je construis ici mon espace personnel autour de l’automatisme, l’hydraulique, et les projets open source.<br>
+      Explore mes projets, tutoriels, ou contacte-moi pour collaborer&nbsp;!
+    </p>
+    <a class="cta" href="mailto:ton.email@exemple.com">Me contacter</a>
+    <!--
+      Tu peux ajouter d'autres liens ici, par exemple vers GitHub, LinkedIn, CV PDF, etc.
+      <a class="cta" href="https://github.com/ColettesCorvette" target="_blank">Mon GitHub</a>
+    -->
+  </main>
+  <footer>
+    &copy; 2025 ColettesCorvette &mdash; Tous droits réservés
+  </footer>
+</body>
+</html>
