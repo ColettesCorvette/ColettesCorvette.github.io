@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Colette's Corvette - Accueil</title>
-  <meta name="description" content="Bienvenue sur le site personnel de ColettesCorvette.">
+  <title>Thomas Fuchs - Futur Admin Sys / CTO</title>
+  <meta name="description" content="Site personnel de Thomas Fuchs, étudiant IT, futur administrateur systèmes et CTO.">
   <style>
     :root {
       --main-bg: #232946;
@@ -14,6 +14,8 @@
       --card-bg: #121629cc;
       --button-bg: #eebbc3;
       --button-color: #232946;
+      --danger: #ffa500;
+      --danger-dark: #f07c00;
     }
     body {
       background: var(--main-bg);
@@ -24,88 +26,295 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+    }
+    .bande-chantier {
+      width: 100vw;
+      height: 38px;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--danger),
+        var(--danger) 18px,
+        var(--danger-dark) 18px,
+        var(--danger-dark) 36px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: fixed;
+      left: 0;
+      z-index: 100;
+    }
+    .bande-chantier.top { top: 0; }
+    .bande-chantier.bottom { bottom: 0; }
+    .chantier-texte {
+      font-size: 1.1rem;
+      color: #232946;
+      font-weight: bold;
+      letter-spacing: 2px;
+      animation: defilement 6s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes defilement {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-100vw); }
     }
     header {
-      margin-top: 4rem;
+      margin-top: 80px;
       text-align: center;
     }
     h1 {
       color: var(--heading);
-      font-size: 3rem;
-      margin-bottom: 0.5em;
+      font-size: 2.5rem;
+      margin-bottom: 0.3em;
     }
     h2 {
       color: var(--accent);
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 400;
       margin-top: 0;
-      margin-bottom: 2em;
+      margin-bottom: 1em;
     }
     main {
       background: var(--card-bg);
-      padding: 2.5em 2em;
+      padding: 2em 2em;
       border-radius: 2em;
       box-shadow: 0 8px 32px 0 #0003;
-      max-width: 400px;
-      width: 90%;
-      margin-bottom: 3em;
+      max-width: 430px;
+      width: 95%;
+      margin-bottom: 2em;
+      text-align: center;
     }
-    p {
-      margin: 1.3em 0;
+    .desc {
+      margin: 1em 0 2em 0;
+      font-size: 1.15rem;
+    }
+    .cta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.1em;
+      margin: 1.5em 0 0.5em 0;
     }
     .cta {
-      display: inline-block;
       background: var(--button-bg);
       color: var(--button-color);
-      padding: 0.75em 2em;
+      padding: 0.65em 1.8em;
       border-radius: 2em;
       text-decoration: none;
       font-weight: bold;
-      margin-top: 2em;
+      font-size: 1.05rem;
+      border: none;
       box-shadow: 0 2px 8px 0 #0001;
       transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      margin-bottom: 0.2em;
     }
-    .cta:hover {
+    .cta:hover, .cta:focus {
       background: var(--heading);
       color: var(--main-bg);
     }
-    footer {
-      margin-top: auto;
-      text-align: center;
-      color: #7c7c7c;
-      padding-bottom: 1.5em;
+    .lang-switch {
+      margin-bottom: 1em;
+      margin-top: -0.2em;
+      text-align: right;
+      width: 100%;
+    }
+    .lang-btn {
+      background: #b8c1ec;
+      color: #232946;
+      border-radius: 1em;
+      border: none;
+      padding: 0.45em 1em;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 600;
+      margin-left: 1em;
+    }
+    .lang-btn:hover { background: var(--accent); }
+    /* Modale contact */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(35,41,70,0.92);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: #fff;
+      color: #232946;
+      padding: 2em 1.5em;
+      border-radius: 1.2em;
+      width: 95%;
+      max-width: 370px;
+      box-shadow: 0 10px 40px 0 #0003;
+      text-align: left;
+      position: relative;
+    }
+    .modal-content label { font-weight: 500; }
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      margin: 0.7em 0 1em 0;
+      padding: 0.5em;
+      border-radius: 0.7em;
+      border: 1px solid #ccc;
       font-size: 1em;
     }
-    @media (max-width: 500px) {
-      main {
-        padding: 1.3em 0.7em;
-        border-radius: 1em;
-      }
-      h1 {
-        font-size: 2.2rem;
-      }
+    .modal-content textarea { min-height: 80px; }
+    .modal-close {
+      position: absolute;
+      top: 0.6em; right: 1em;
+      font-size: 1.2em;
+      background: none;
+      border: none;
+      color: #e35c27;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal-content .cta {
+      margin-top: 0.4em;
+      width: 100%;
+    }
+    .modal-content .cta:active {
+      background: #ddd;
+    }
+    .msg-success {
+      color: #009933;
+      font-weight: bold;
+      margin-bottom: 1em;
+      display: none;
+    }
+    @media (max-width: 540px) {
+      main { padding: 1em 0.5em; border-radius: 1em; }
+      h1 { font-size: 1.5rem; }
+      header { margin-top: 60px; }
     }
   </style>
 </head>
 <body>
+  <div class="bande-chantier top">
+    <span class="chantier-texte">🚧 Site en construction - Bientôt plus de contenu ! 🚧</span>
+  </div>
   <header>
-    <h1>🚗 ColettesCorvette</h1>
-    <h2>Bienvenue sur mon site&nbsp;!</h2>
+    <h1>Thomas Fuchs</h1>
+    <h2>Étudiant en informatique | Futur Admin Sys & CTO</h2>
   </header>
   <main>
-    <p>
-      Passionné·e par la tech, le DIY et le partage de connaissances, je construis ici mon espace personnel autour de l’automatisme, l’hydraulique, et les projets open source.<br>
-      Explore mes projets, tutoriels, ou contacte-moi pour collaborer&nbsp;!
-    </p>
-    <a class="cta" href="mailto:ton.email@exemple.com">Me contacter</a>
-    <!--
-      Tu peux ajouter d'autres liens ici, par exemple vers GitHub, LinkedIn, CV PDF, etc.
-      <a class="cta" href="https://github.com/ColettesCorvette" target="_blank">Mon GitHub</a>
-    -->
+    <div class="lang-switch">
+      <button class="lang-btn" id="btn-translate">Traduire en anglais 🇬🇧</button>
+    </div>
+    <div class="desc" id="desc-fr">
+      <p>Bienvenue sur mon site personnel !</p>
+      <p>
+        Je suis étudiant en informatique, passionné par l’automatisation, la gestion des systèmes et l’innovation numérique.<br>
+        Mon ambition ? <b>Devenir administrateur systèmes et, pourquoi pas, CTO !</b>
+      </p>
+      <p>
+        <b>Résumé pro :</b><br>
+        &bull; Expériences en gestion de serveurs (Linux & Windows)<br>
+        &bull; Administration réseau et sécurité<br>
+        &bull; Automatisation (scripts Bash, PowerShell, Python)<br>
+        &bull; Curieux, autonome, toujours prêt à relever de nouveaux défis IT
+      </p>
+    </div>
+    <div class="desc" id="desc-en" style="display: none;">
+      <p>Welcome to my personal website!</p>
+      <p>
+        I am an IT student, passionate about automation, system administration, and digital innovation.<br>
+        My goal? <b>To become a systems administrator and, maybe one day, a CTO!</b>
+      </p>
+      <p>
+        <b>Professional summary:</b><br>
+        &bull; Experience managing Linux & Windows servers<br>
+        &bull; Network administration and security<br>
+        &bull; Automation (Bash, PowerShell, Python scripts)<br>
+        &bull; Curious, independent, always ready for new IT challenges
+      </p>
+    </div>
+    <div class="cta-bar">
+      <button class="cta" id="open-contact">Contact</button>
+      <a class="cta" href="#projets" id="btn-projets">Mes Projets</a>
+    </div>
+    <div style="font-size:0.95em;margin-top:1.7em;color:#eebbc3;">Ce site évolue régulièrement, reviens bientôt&nbsp;!</div>
   </main>
+  <!-- Modale contact -->
+  <div class="modal" id="contact-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="close-modal">&times;</button>
+      <h3>Contacte-moi</h3>
+      <form id="contact-form">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" placeholder="Ton nom..." required>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="Ton email..." required>
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" placeholder="Ton message..." required></textarea>
+        <button type="submit" class="cta">Envoyer</button>
+        <div class="msg-success" id="success-msg">Message envoyé !</div>
+      </form>
+    </div>
+  </div>
+  <div class="bande-chantier bottom">
+    <span class="chantier-texte">🚧 Thomas Fuchs - Site en construction 🚧</span>
+  </div>
   <footer>
-    &copy; 2025 ColettesCorvette &mdash; Tous droits réservés
+    <div style="margin: 2.5em 0 1em 0; text-align:center; color:#7c7c7c; font-size: 1em;">
+      &copy; 2025 Thomas Fuchs &mdash; Tous droits réservés
+    </div>
   </footer>
+  <script>
+    // Traduction FR <-> EN
+    const btnTranslate = document.getElementById('btn-translate');
+    const descFr = document.getElementById('desc-fr');
+    const descEn = document.getElementById('desc-en');
+    let enMode = false;
+    btnTranslate.addEventListener('click', function() {
+      enMode = !enMode;
+      if (enMode) {
+        descFr.style.display = "none";
+        descEn.style.display = "block";
+        btnTranslate.textContent = "Afficher en français 🇫🇷";
+      } else {
+        descFr.style.display = "block";
+        descEn.style.display = "none";
+        btnTranslate.textContent = "Traduire en anglais 🇬🇧";
+      }
+    });
+
+    // Modale contact
+    const openContact = document.getElementById('open-contact');
+    const contactModal = document.getElementById('contact-modal');
+    const closeModal = document.getElementById('close-modal');
+    openContact.onclick = () => contactModal.classList.add('active');
+    closeModal.onclick = () => contactModal.classList.remove('active');
+    window.onclick = (e) => { if (e.target === contactModal) contactModal.classList.remove('active'); }
+
+    // Formulaire contact (simulé, pas d'envoi réel)
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('success-msg');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      successMsg.style.display = 'block';
+      setTimeout(() => {
+        contactModal.classList.remove('active');
+        form.reset();
+        successMsg.style.display = 'none';
+      }, 1800);
+    });
+
+    // Bouton projets (scroll vers #projets si présent)
+    document.getElementById('btn-projets').onclick = function(e) {
+      const cible = document.getElementById('projets');
+      if (cible) {
+        e.preventDefault();
+        cible.scrollIntoView({behavior: 'smooth'});
+      }
+    }
+  </script>
 </body>
 </html>
